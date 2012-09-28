@@ -6,6 +6,9 @@ from evernote_auth import EvernoteAPI
 from account.models import UserProfile
 import thrift.protocol.TBinaryProtocol as TBinaryProtocol
 import thrift.transport.THttpClient as THttpClient
+import evernote.edam.userstore.UserStore as UserStore
+import logging
+import json
 
 
 def index(request):
