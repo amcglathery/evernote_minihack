@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   			<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+			<title>Bootstrap 101 Template</title>
+		 	<!-- Bootstrap -->
+		 	<link href="css/bootstrap.min.css" rel="stylesheet">
+		</head>
+
+
+		<body>
+		
+  			<h1>Geo-Switch!</h1>
+			<script src="http://code.jquery.com/jquery-latest.js"></script>
+			<script src="js/bootstrap.min.js"></script>
+<script>
+
+  var listNotes = new Array();
+  var geocoder;
+  var map;
+  var infowindow = new google.maps.InfoWindow();
+  var marker;
+  var listLength;
+
+  function 
+
+  <select name='Notes' onchange='OnChange(this.form.Notes);'>
+  for (var i = 0; i<listLength; i++){
+	<option> listNotes[i] </option>
+	}
+
+  function onChange(dropdown){
+  
+  var myindex = dropdown.selectedIndex
+  var SelValue = dropdown.options[myindex].value
+  var address = prompt("Enter the address: ", "1 tilton lane")
+  var lat = getLat(address)
+  var long = getLong(address)
+  bringToWindow(lat, long)
+  var latlong = lat + "," long
+  return latlong
+  }
+
+  function getNotes(theNotes){
+
+  	for(i = 0, i< listLength; i++){
+		listNotes[i] = listNores[i]
+	}
+
+  }
+
+  function bringToWindow(latitude, longitude) {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(latitude, longitude);
+    var mapOptions = {
+      zoom: 8,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+	    		}
+	    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+		  }
+	
+  function getLat(address){
+	var temp = JSON.parse("http://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&sensor=false")
+	var lat = temp.geometry.location.lat
+		}
+
+  function getLong(address){
+	var temp = JSON.parse("http://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&sensor=false")
+	var lat = temp.geometry.location.lon
+		}
+
+		</script>
+		</body>
+	</html>
