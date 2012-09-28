@@ -1,9 +1,15 @@
+from datetime import datetime, date
+from dateutil import rrule
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.conf import settings
 from evernote_auth import EvernoteAPI
-from account.models import UserProfile
+from account.models import UserProfile, create_user_profile
 import thrift.protocol.TBinaryProtocol as TBinaryProtocol
 import thrift.transport.THttpClient as THttpClient
 import evernote.edam.userstore.UserStore as UserStore
@@ -50,15 +56,17 @@ def login_evernote_token(request):
             newUser.save()
             user = authenticate(username=evernoteUser.username, password=str(evernoteUser.id))
         login(request, user)
-    profile = request.user.profile
+
     try:
         expires_time = datetime.fromtimestamp(int(credentials['expires']))
     except TypeError:
         logging.error("Error parsing token expires time")
         expires_time = datetime.now()
+
+    profile = UserProfile()
+    profile.user = user
     profile.evernote_token = credentials['oauth_token']
     profile.evernote_token_expires_time = expires_time
     profile.evernote_note_store_url = credentials['edam_noteStoreUrl']
     profile.save()
-    return HttpResponseRedirect(reverse('basic.views.index',
-        args=[]))
+    return HttpResponseRedirect(reverse('base.views.index', args=[]))

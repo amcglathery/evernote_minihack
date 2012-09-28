@@ -8,8 +8,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'base.views.index'),
     url(r'^login/$', 'account.views.login_page'),
-    url('^auth/gettok/$', 'base.views.run_evernote_auth'),
-    url('^auth/login/$', 'base.views.login_evernote_token'),
+    url(r'^auth/gettok/$', 'base.views.run_evernote_auth'),
+    url(r'^auth/login/$', 'base.views.login_evernote_token'),
+    url(r'^auth/logout/$', 'account.views.logout_page'),
 
 
     # Uncomment the admin/doc line below to enable admin documentation:

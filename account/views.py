@@ -13,10 +13,10 @@ def home_page(request):
 def login_page(request):
     next_page = request.GET.get('next')
     if next_page is None:
-        next_page = reverse('basic.views.index', args=[])
+        next_page = reverse('base.views.index', args=[])
     if request.user.is_authenticated():
         return HttpResponseRedirect(next_page)
-    return render_to_response('login.html', { 'redirect_to': next_page,
+    return render_to_response('base.html', { 'redirect_to': next_page,
         'evernote_key': settings.EVERNOTE_KEY},
         context_instance=RequestContext(request))
 
@@ -26,7 +26,7 @@ def auth(request):
     user = authenticate(username=username, password=password)
     redirect_to = request.REQUEST.get('next')
     if redirect_to is None:
-        redirect_to = reverse('basic.views.index', args=[])
+        redirect_to = reverse('base.views.index', args=[])
     if user is not None:
         messages.info(request, "Logged in as %s" % username)
         login(request, user)
